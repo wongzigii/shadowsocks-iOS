@@ -10,6 +10,7 @@
 
 #define SAVED_STR_LEN 512
 
+
 char _server[SAVED_STR_LEN];
 char _remote_port[SAVED_STR_LEN];
 char _method[SAVED_STR_LEN];
@@ -355,6 +356,7 @@ static void remote_recv_cb (EV_P_ ev_io *w, int revents) {
     }
 }
 
+//33
 static void remote_send_cb (EV_P_ ev_io *w, int revents) {
 	struct remote_ctx *remote_send_ctx = (struct remote_ctx *)w;
 	struct remote *remote = remote_send_ctx->remote;
@@ -461,6 +463,8 @@ void close_and_free_remote(EV_P_ struct remote *remote) {
 		free_remote(remote);
 	}
 }
+
+//22
 struct server* new_server(int fd) {
 	struct server *server;
 	server = malloc(sizeof(struct server));
@@ -496,6 +500,8 @@ void close_and_free_server(EV_P_ struct server *server) {
 		free_server(server);
 	}
 }
+
+//11
 static void accept_cb (EV_P_ ev_io *w, int revents)
 {
 	struct listen_ctx *listener = (struct listen_ctx *)w;
@@ -544,7 +550,7 @@ static void accept_cb (EV_P_ ev_io *w, int revents)
 		break;
 	}
 }
-
+//01 001
 void set_config(const char *server, const char *remote_port, const char* password, const char* method) {
     assert(strlen(server) < SAVED_STR_LEN);
     assert(strlen(remote_port) < SAVED_STR_LEN);
@@ -561,10 +567,11 @@ void set_config(const char *server, const char *remote_port, const char* passwor
     config_encryption(password, method);
 }
 
+//03
 int local_main ()
 {
     int listenfd;
-    listenfd = create_and_bind("1080");
+    listenfd = create_and_bind("80");
     if (listenfd < 0) {
 #ifdef DEBUG
         NSLog(@"bind() error..");
@@ -576,7 +583,7 @@ int local_main ()
         return 1;
     }
 #ifdef DEBUG
-    NSLog(@"server listening at port %s\n", "1080");
+    NSLog(@"server listening at port %s\n", "80");
 #endif
 
     setnonblocking(listenfd);

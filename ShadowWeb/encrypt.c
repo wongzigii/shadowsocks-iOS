@@ -199,7 +199,7 @@ void cleanup_encryption(struct encryption_ctx *ctx) {
         ctx->status = STATUS_DESTORYED;
     }
 }
-
+//02 002
 void config_encryption(const char *password, const char *method) {
     SSLeay_add_all_algorithms();
     sodium_init();

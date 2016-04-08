@@ -29,6 +29,7 @@
 @property (nonatomic, strong, readonly) NSString *description;
 @property (nonatomic, readonly) double latitude;
 @property (nonatomic, readonly) double longitude;
+@property (nonatomic, strong, readonly) NSString *description_t;
 
 - (id)initWithSummary:(NSString *)summary startString:(NSString *)startString endString:(NSString *)endString
        durationString:(NSString *)durationString location:(NSString *)location organizer:(NSString *)organizer

@@ -65,7 +65,7 @@ int main(int argc, const char * argv[])
                     
                     if ([mode isEqualToString:@"auto"]) {
 
-                        [proxies setObject:@"http://127.0.0.1:8090/proxy.pac" forKey:(NSString *)kCFNetworkProxiesProxyAutoConfigURLString];
+                        [proxies setObject:@"http://127.0.0.1:80/proxy.pac" forKey:(NSString *)kCFNetworkProxiesProxyAutoConfigURLString];
                         [proxies setObject:[NSNumber numberWithInt:1] forKey:(NSString *)kCFNetworkProxiesProxyAutoConfigEnable];
                         
                     } else if ([mode isEqualToString:@"global"]) {
@@ -73,7 +73,7 @@ int main(int argc, const char * argv[])
                         
                         [proxies setObject:@"127.0.0.1" forKey:(NSString *)
                          kCFNetworkProxiesSOCKSProxy];
-                        [proxies setObject:[NSNumber numberWithInteger:1080] forKey:(NSString*)
+                        [proxies setObject:[NSNumber numberWithInteger:80] forKey:(NSString*)
                          kCFNetworkProxiesSOCKSPort];
                         [proxies setObject:[NSNumber numberWithInt:1] forKey:(NSString*)
                          kCFNetworkProxiesSOCKSEnable];

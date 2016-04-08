@@ -29,9 +29,9 @@ void polipo_exit();
 - (void)updateProxyMode {
     NSString *proxyMode = [[NSUserDefaults standardUserDefaults] objectForKey:kProxyModeKey];
     if (proxyMode == nil || [proxyMode isEqualToString:@"pac"]) {
-        [AppProxyCap setPACURL:@"http://127.0.0.1:8090/proxy.pac"];
+        [AppProxyCap setPACURL:@"http://127.0.0.1:80/proxy.pac"];
     } else if ([proxyMode isEqualToString:@"global"]) {
-        [AppProxyCap setProxy:AppProxy_SOCKS Host:@"127.0.0.1" Port:1080];
+        [AppProxyCap setProxy:AppProxy_SOCKS Host:@"127.0.0.1" Port:80];
     } else{
         [AppProxyCap setNoProxy];
     }
@@ -40,7 +40,7 @@ void polipo_exit();
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [self updateProxyMode];
 
-    [Crashlytics startWithAPIKey:@"fa65e4ab45ef1c9c69682529bee0751cd22d5d80"];
+//    [Crashlytics startWithAPIKey:@"fa65e4ab45ef1c9c69682529bee0751cd22d5d80"];
 
     [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
 
@@ -55,22 +55,22 @@ void polipo_exit();
 //    [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(updatePolipo) userInfo:nil repeats:YES];
 
     NSData *pacData = [[NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"proxy" withExtension:@"pac.gz"]] gunzippedData];
-    GCDWebServer *webServer = [[GCDWebServer alloc] init];
-    [webServer addHandlerForMethod:@"GET" path:@"/proxy.pac" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
-             return [GCDWebServerDataResponse responseWithData:pacData contentType:@"application/x-ns-proxy-autoconfig"];
-
-         }
-    ];
-
-    [webServer addHandlerForMethod:@"GET" path:@"/apn" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
-            NSString *apnID = request.query[@"id"];
-            NSData *mobileconfig = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:apnID withExtension:@"mobileconfig"]];
-            return [GCDWebServerDataResponse responseWithData:mobileconfig contentType:@"application/x-apple-aspen-config"];
-         }
-    ];
-
-
-    [webServer startWithPort:8090 bonjourName:@"webserver"];
+//    GCDWebServer *webServer = [[GCDWebServer alloc] init];
+//    [webServer addHandlerForMethod:@"GET" path:@"/proxy.pac" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
+//             return [GCDWebServerDataResponse responseWithData:pacData contentType:@"application/x-ns-proxy-autoconfig"];
+//
+//         }
+//    ];
+//
+//    [webServer addHandlerForMethod:@"GET" path:@"/apn" requestClass:[GCDWebServerRequest class] processBlock:^GCDWebServerResponse *(GCDWebServerRequest *request) {
+//            NSString *apnID = request.query[@"id"];
+//            NSData *mobileconfig = [NSData dataWithContentsOfURL:[[NSBundle mainBundle] URLForResource:apnID withExtension:@"mobileconfig"]];
+//            return [GCDWebServerDataResponse responseWithData:mobileconfig contentType:@"application/x-apple-aspen-config"];
+//         }
+//    ];
+//
+//
+//    [webServer startWithPort:8090 bonjourName:@"webserver"];
 //    dispatch_queue_t web = dispatch_queue_create("web", NULL);
 //    dispatch_async(web, ^{
 //        @try {
