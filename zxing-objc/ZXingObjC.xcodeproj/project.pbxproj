@@ -4333,7 +4333,7 @@
 		25403CAA166A96F900E13304 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastTestingUpgradeCheck = 0720;
+				LastTestingUpgradeCheck = 0730;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = zxing;
 			};
